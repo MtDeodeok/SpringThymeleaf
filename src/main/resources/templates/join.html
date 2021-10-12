@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<form action="/join" method="post">
+			<label>ID</label><input type="text" id="id" name="id">
+			<label>PW</label><input type="password" id="pw" name="pw">
+			<label>Name</label><input type="text" id="name" name="name">
+			<label>Phone</label><input type="text" id="phone" name="phone">
+			<input type="submit" value="회원가입"><input type="reset" value="초기화"><input type="button" onclick="location.href='/Login'" value="취소">
+		</form>
+	</body>
+</html>

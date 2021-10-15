@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-	</head>
-	<body>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 	<h1>메인 페이지.</h1>
-	<div th:object="${loginMember}">
-		<p th:text="*{id}">memberId</p>님 환영합니다.
+	<div>
+		<div>
+			<img th:src="${#strings.isEmpty(loginMember.profile)} ? '/profileImg/null.jpg' : ${loginMember.profile}" />
+		</div>
+		<p>
+			<span th:text="${loginMember.id}">memberId</span>님 환영합니다.
+		</p>
 	</div>
-	</body>
+	<a href="/LogOut">로그아웃</a>
+
+</body>
 </html>

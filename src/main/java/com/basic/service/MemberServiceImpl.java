@@ -56,11 +56,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberdao.memberLogin(id);
 	}
-
+	
 	@Override
 	public int memberCheck(String id, String pw) {
 		String password = shautils.encodingPw(pw);
 		return memberdao.memberCheck(id, password);
 	}
+
 
 }

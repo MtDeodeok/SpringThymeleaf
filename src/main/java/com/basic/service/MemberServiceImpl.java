@@ -1,9 +1,16 @@
 package com.basic.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.resource.PathResourceResolver;
 
 import com.basic.dao.MemberDAO;
 import com.basic.util.ShaUtils;
@@ -45,9 +52,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO selectId(String id) {
+	public MemberVO memberLogin(String id) {
 		
-		return null;
+		return memberdao.memberLogin(id);
 	}
 
 	@Override

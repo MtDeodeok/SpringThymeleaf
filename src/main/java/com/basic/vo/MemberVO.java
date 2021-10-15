@@ -12,4 +12,5 @@ public class MemberVO {
 	private String phone;
 	private LocalDate registDate;
 	private int grade;
+	private String profile;
 }

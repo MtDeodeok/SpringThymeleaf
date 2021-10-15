@@ -13,6 +13,6 @@ public interface MemberDAO {
 	void updateMember(MemberVO membervo);
 	void deleteMember(@Param("id") String id);
 	List<MemberVO> selectAll();
-	MemberVO selectId(@Param("id") String id);
+	MemberVO memberLogin(@Param("id") String id);
 	int memberCheck(@Param("id") String id,@Param("pw")  String pw);
 }

@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "file.upload.directory",
+    "type": "java.lang.String",
+    "description": "A description for 'file.upload.directory'"
+  },
+  {
+    "name": "file.uploadprofile.directory",
+    "type": "java.lang.String",
+    "description": "A description for 'file.uploadprofile.directory'"
+  },
+  {
+    "name": "file.uploadprofile.directory",
+    "type": "java.lang.String",
+    "description": "A description for 'file.uploadprofile.directory'"
+  },
+  {
+    "name": "file.uploadprofile.directory",
+    "type": "java.lang.String",
+    "description": "A description for 'file.uploadprofile.directory'"
+  }
+]}

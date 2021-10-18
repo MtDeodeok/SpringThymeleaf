@@ -1,51 +1,188 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-function readImage(input) {
-    if(input.files && input.files[0]) {
-        // FileReader 인스턴스 생성
-        const reader = new FileReader()
-        // 이미지가 로드가 된 경우
-        reader.onload = e => {
-            const previewImage = document.getElementById("viewimg")
-            previewImage.src = e.target.result
-        }
-        // reader가 이미지 읽도록 하기
-        reader.readAsDataURL(input.files[0])
-    }
-}
-// input file에 change 이벤트 부여
-const inputImage = document.getElementsByClassName("profileimg")
-inputImage.addEventListener("change", e => {
-    readImage(e.target)
-})
-</script>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		.join-page {
+			position: relative;
+			overflow: hidden;
+			width: 100vw;
+			height: 100vh;
+			background: linear-gradient(50deg, rgb(0, 195, 255) 0%, rgb(37, 80, 223) 35%, rgb(149, 41, 199) 80%);
+		}
+		.join-page::before,
+		.join-page::after {
+			position: absolute;
+			display: block;
+			content: "";
+			border-radius: 5px;
+			transform: rotate(55deg);
+		}
+		.join-page::before {
+			top: 5%;
+			left: -15%;
+			width: 30vw;
+			height: 20vw;
+			background-color: rgba(255, 255, 255, 0.03);
+		}
+		.join-page::after {
+			bottom: -30%;
+			right: -10%;
+			width: 35vw;
+			height: 45vw;
+			background-color: rgba(0, 0, 0, 0.03);
+		}
+		.join-form {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			padding: 40px;
+			border-radius: 10px;
+			background-color: #fff;
+			box-shadow: 4px 4px 20px 0px rgb(0 0 0 / 5%);
+		}
+		.join-form header{
+			font-size: 28px;
+			font-weight: bold;
+			margin-bottom: 30px;
+			text-align: center;
+		}
+		.join-form label {
+			display: block;
+			font-size: 13px;
+			font-weight: bold;
+			color: #3a3a3a;
+			margin-bottom: 4px;
+		}
+		.join-form form > div + div{
+			margin-top: 14px;
+		}
+		.join-form form > div:hover label + input {
+			border-bottom-color: #333;
+		}
+		.join-form form > div input {
+			width: 100%;
+		}
+		.join-form form > div label + input {
+			display: block;
+			padding: 6px 0 4px;
+			font-size: 16px;
+			color: #666;
+			border: none;
+			border-bottom: 1px solid #999;
+		}
+		.join-form form > div label + input:focus {
+			outline: none;
+			margin-bottom: 0px;
+			border-bottom-color: #000;
+		}
+		.join-form form > div input:focus  + label {
+			margin-top: 13px;
+		}
+		.join-form form > div input:focus  + .btn.join {
+			margin-top: 29px;
+		}
+		/* 회원가입 버튼 */
+		.join-form form .btn-group {
+			margin-top: 50px;
+			padding-bottom: 10px;
+			text-align: center;
+		}
+		.join-form form .btn-group .btn {
+			display: inline-block;
+			box-sizing: border-box;
+			padding: 0 20px;
+			font-size: 16px;
+			font-weight: bold;
+			border: none;
+			-webkit-appearance: none;
+			appearance: none;
+			cursor: pointer;
+			background-color: #f1f1f1;
+			border-radius: 20px;
+			height: 40px;
+			line-height: 40px;
+		}
+		/* 프로필 이미지 */
+		.join-form .profile-img {
+			border-bottom: 1px solid #666;
+			padding-bottom: 4px;
+		}
+		.join-form .profile-img img {
+			display: inline-block;
+			vertical-align: middle;
+			width: 64px;
+			height: 64px;
+		}
+		.join-form .profile-img input {
+			display: inline-block;
+			vertical-align: middle;
+			width: calc(100% - 70px);
+		}
+	</style>
 </head>
 <body>
-	<form action="/join" method="post" enctype="multipart/form-data">
-		<div>
-			<img src="https://via.placeholder.com/64x64.png"
-				id="viewimg" alt="섬네일 이미지" width="64" height="64">
-			<input type="file" name="profileimg" id="profileimg" onchange="readImage(this)">
+	<div class="join-page">
+		<div class="join-form">
+			<header>
+				회원가입
+			</header>
+			<form action="/join" method="post" enctype="multipart/form-data">
+				<div class="profile-img">
+					<label for="profileimg">Profile Image</label>
+					<img src="https://via.placeholder.com/64x64.png" id="viewimg" alt="프로필 이미지 미리보기" />
+					<input type="file" name="profileimg" id="profileimg" onchange="readImage(this)">
+				</div>
+				<div>
+					<label for="id">ID</label>
+					<input type="text" id="id" name="id" placeholder="아이디">
+				</div>
+				<div>
+					<label for="pw">Password</label>
+					<input type="password" id="pw" name="pw" placeholder="비밀번호">
+				</div>
+				<div>
+					<label for="name">Name</label>
+					<input type="text" id="name" name="name" placeholder="이름">
+				</div>
+				<div>
+					<label for="phone">Phone</label>
+					<input type="text" id="phone" name="phone" placeholder="전화번호">
+				</div>
+				<div class="btn-group">
+					<button class="btn" type="submit">회원가입</button>
+					<!-- <button class="btn" type="reset">초기화</button> -->
+					<button class="btn" type="button" onclick="location.href='/join'">취소</button>					
+				</div>
+			</form>
 		</div>
-		<div>
-			<label>ID</label><input type="text" id="id" name="id">
-		</div>
-		<div>
-			<label>PW</label><input type="password" id="pw" name="pw">
-		</div>
-		<div>
-			<label>Name</label><input type="text" id="name" name="name">
-		</div>
-		<div>
-			<label>Phone</label><input type="text" id="phone" name="phone">
-		</div>
-		<input type="submit" value="회원가입"><input type="reset"
-			value="초기화"><input type="button"
-			onclick="location.href='/Login'" value="취소">
-	</form>
+	</div>
+
+	<script type="text/javascript">
+		function readImage(input) {
+			if(input.files && input.files[0]) {
+				// FileReader 인스턴스 생성
+				const reader = new FileReader()
+				// 이미지가 로드가 된 경우
+				reader.onload = e => {
+					const previewImage = document.getElementById("viewimg")
+					previewImage.src = e.target.result
+				}
+				// reader가 이미지 읽도록 하기
+				reader.readAsDataURL(input.files[0])
+			}
+		}
+		// input file에 change 이벤트 부여
+		const inputImage = document.getElementsByClassName("profileimg")
+		inputImage.addEventListener("change", e => {
+			readImage(e.target)
+		})
+	</script>
 </body>
 </html>

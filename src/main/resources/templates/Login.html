@@ -3,12 +3,123 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			.login-page {
+				position: relative;
+				overflow: hidden;
+				width: 100vw;
+				height: 100vh;
+				background: linear-gradient(50deg, rgb(0, 195, 255) 0%, rgb(37, 80, 223) 35%, rgb(149, 41, 199) 80%);
+			}
+			.login-page::before,
+			.login-page::after {
+				position: absolute;
+				display: block;
+				content: "";
+				border-radius: 5px;
+				transform: rotate(55deg);
+			}
+			.login-page::before {
+				top: 5%;
+				left: -15%;
+				width: 30vw;
+				height: 20vw;
+				background-color: rgba(255, 255, 255, 0.03);
+			}
+			.login-page::after {
+				bottom: -30%;
+				right: -10%;
+				width: 35vw;
+				height: 45vw;
+				background-color: rgba(0, 0, 0, 0.03);
+			}
+			.login-form {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				padding: 30px 40px;
+				border-radius: 10px;
+				background-color: #fff;
+				box-shadow: 4px 4px 20px 0px rgb(0 0 0 / 5%);
+			}
+			.login-form label {
+				display: block;
+				font-size: 14px;
+				font-weight: bold;
+				color: #3a3a3a;
+			}
+			.login-form input + label {
+				margin-top: 18px;
+			}
+			.login-form label + input {
+				display: block;
+				margin-top: 8px;
+				padding: 6px 0 4px;
+				font-size: 16px;
+				color: #666;
+				border: none;
+				border-bottom: 1px solid #999;
+			}
+			.login-form label + input:focus {
+				outline: none;
+				border-bottom-width: 2px;
+				margin-bottom: 0px;
+				border-bottom-color: #000;
+			}
+			.login-form input:focus  + label {
+				margin-top: 17px;
+			}
+			.login-form input:focus  + .btn.login {
+				margin-top: 29px;
+			}
+			.login-form .btn {
+				display: block;
+				box-sizing: border-box;
+				padding: 0;
+				font-size: 16px;
+				font-weight: bold;
+				border: none;
+				-webkit-appearance: none;
+				appearance: none;
+				cursor: pointer;
+			}
+			.login-form .btn.login {
+				margin-top: 30px;
+				border-radius: 20px;
+				width: 100%;
+				height: 40px;
+				line-height: 40px;
+				color: #fff;
+				background: linear-gradient(50deg, rgb(0, 195, 255) 0%, rgb(37, 80, 223) 35%, rgb(149, 41, 199) 80%);
+			}
+			.login-form .btn.join {
+				margin: 10px auto 0;
+				color: #666;
+				font-size: 14px;
+				background-color: transparent;
+			}
+			.login-form .btn.join:hover {
+				text-decoration: underline;
+			}
+		</style>
 	</head>
 	<body>
-		<form action="/Login" method="post">
-			<label>ID</label><input type="text" id="id" name="id">
-			<label>PW</label><input type="password" id="pw" name="pw">
-			<input type="submit" value="로그인"><input type="button" onclick="location.href='/join'" value="회원가입">
-		</form>
+		<div class="login-page">
+			<div class="login-form">
+				<form action="/Login" method="post">
+					<label for="id">회원 ID</label>
+					<input type="text" id="id" name="id" placeholder="아이디를 입력하세요."/>
+					<label for="pw">비밀번호</label>
+					<input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요."/>
+					<button class="btn login" type="submit">로그인</button>
+					<button class="btn join" type="button" onclick="location.href='/join'">회원가입</button>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>

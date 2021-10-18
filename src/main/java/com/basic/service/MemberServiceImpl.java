@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
 import com.basic.dao.MemberDAO;
-import com.basic.util.ShaUtils;
+import com.basic.util.SHAUtils;
 import com.basic.vo.MemberVO;
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	private final MemberDAO memberdao;
 	
-	private final ShaUtils shautils;
+	private final SHAUtils shautils;
 	
 	@Override
 	public void insertMember(MemberVO membervo) {

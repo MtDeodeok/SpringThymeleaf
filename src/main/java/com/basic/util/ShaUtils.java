@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ShaUtils {
+public class SHAUtils {
 	private static final Charset UTF_8 = StandardCharsets.UTF_8;
 
     public static byte[] digest(byte[] input, String algorithm) {
@@ -32,7 +32,7 @@ public class ShaUtils {
     
     public String encodingPw(String pw) {
     	String algorithm = "SHA3-256";
-    	String result = bytesToHex(ShaUtils.digest(pw.getBytes(UTF_8), algorithm));
+    	String result = bytesToHex(SHAUtils.digest(pw.getBytes(UTF_8), algorithm));
     	return result;
     }
     

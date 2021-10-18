@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("td[name='title']").on("click", function() {
+		var title = $(this).closest('td').attr('value') + "";
+		$('input[id=title]').val(title);
+		$("#detail").attr("action", "detail");
+		$("#detail").submit();
+	});
+});	
+</script>
+</head>
+<body>
+	board
+	<form method="post" id="detail">
+		<input type="hidden" id="title" name="title">
+	</form>
+	<table id="list" border="1">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>등록일</th>
+				<th>작성자</th>				
+			</tr>
+		</thead>
+		<tr th:each="board, index : ${boardList}">
+			<td th:text="${index.count}"></td>
+			<td id="title" name="title" th:text="${board.title}" th:value="${board.title}"></td>
+			<td th:text="${board.modifiyDate}"></td>
+			<td th:text="${board.memberid}"></td>
+		</tr>
+	</table>
+	
+	<input type="button" onclick="location.href='/createContentsForm'" value="글쓰기">
+</body>
+</html>

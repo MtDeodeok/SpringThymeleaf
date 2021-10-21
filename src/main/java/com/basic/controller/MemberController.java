@@ -33,25 +33,29 @@ public class MemberController {
 	public void main() {
 		
 	}
-	
+
 	@GetMapping("/Login") // 로그인
 	public void Login() {
 		
 	}
 	
 	@PostMapping("/Login") 
-	public String Login(Model model,String id, String pw) {
+	public String Login(HttpServletRequest request,Model model, String id, String pw) {
+		HttpSession session = request.getSession();
 		int check = ms.memberCheck(id, pw);
 		if(check==1) {
-			model.addAttribute("loginMember", ms.memberLogin(id));
-			return "/main";
+			MemberVO member = ms.memberLogin(id);
+			session.setAttribute("loginCheck", true);
+			session.setAttribute("memberID", id);
+			session.setAttribute("profile",member.getProfile());
+			return "redirect:/main";
 		}
 		return "/Login";
 	}
 	
 	@RequestMapping(value="/LogOut", method = RequestMethod.GET)
 	public String LogOut(HttpSession session) {
-		session.removeAttribute("loginMember");
+		session.invalidate();
 		return "/Login";
 	}
 	

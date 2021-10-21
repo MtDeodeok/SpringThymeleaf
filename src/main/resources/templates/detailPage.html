@@ -5,18 +5,59 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-function btn(test){
+function btn1(data){
 	var check = $("[name='update']").val();
-	var check2 = $("[name='delete']").val();
 	if(check=="수정"){
 		$("#detailForm").attr("action", "updateContents");
 		$("#detailForm").submit();
 	}
+}
+function btn2(data){
+	var check = $("[name='delete']").val();
 	if(check2=="삭제") {
 		$("#detailForm").attr("action", "deleteContents");
 		$("#detailForm").submit();
 	}
 }
+function btnCommentUpdate(data){
+	var check = $("[name='commentUpdate']").val();
+	var update = document.getElementById(data.getAttribute('id')).getAttribute('id') ;
+	var updateok = Number(update)+10;
+	if(check=="수정"){
+		document.getElementById(update+"").style.display = "none";
+		document.getElementById(updateok+"").style.display = "block";		
+		var comment = "#comment"+update;
+		var id = "#id"+update;
+		var memberid = "#memberid"+update
+		$(comment).attr('readonly', false);
+		$(comment).attr("name","comment");
+		$(id).attr("name","id");
+		$(memberid).attr("name","memberid");
+	}
+}
+function btnCommentUpdateOk(data){
+	var check = $("[name='commentUpdateOk']").val();
+	var updateok = document.getElementById(data.getAttribute('id')).getAttribute('id') ;
+	var update = Number(updateok)-10;
+	if(check=="확인"){
+		document.getElementById(updateok+"").style.display = "none";
+		document.getElementById(update+"").style.display = "block";		
+		var comment = "#comment"+update;
+		$(comment).attr("readonly", true);
+		$("#commentForm").attr("action", "updateComment");
+		$("#commentForm").submit();
+	}
+}
+
+function btnCommentDelete(data){
+	console.log(data);
+	var check = document.getElementById(data.getAttribute('id')).getAttribute('id') ;
+	var id = "#id"+check;
+	$(id).attr("name","id");
+	$("#commentForm").attr("action", "deleteComment");
+	$("#commentForm").submit();
+}
+
 </script>
 </head>
 <body>
@@ -30,18 +71,49 @@ function btn(test){
 			<textarea name="contents" th:text="${detail.contents}"></textarea> 
 		</div>
 		<div id="writeDiv">
-			<label>등록일 : </label><input type="text" th:value="${detail.writeDate}" readonly>
+			<label>등록일 : </label><span th:text="${detail.writeDate}"></span>
 		</div>
 		<div id="modifiyDiv">
-			<label>수정일 : </label><input type="text" th:value="${detail.modifiyDate}" readonly>
+			<label>수정일 : </label><span th:text="${detail.modifiyDate}"></span>
 		</div>
 		<div id="memberIdDiv">
-			<label>작성자 : </label> <input type="text" name="memberid" th:value="${detail.memberid}" readonly>
+			<label>작성자 : </label><span name="memberid" th:text="${detail.memberid}" th:value="${detail.memberid}"></span>
 		</div>
 	</div>
-	<input type="button" onclick="btn(this)" name="update" value="수정">
-	<input type="button" onclick="btn(this)" name="delete" value="삭제">
+	<div th:if="${session.memberID}==${detail.memberid}">
+		<input type="button" onclick="btn1(this)" name="update" value="수정">
+		<input type="button" onclick="btn2(this)" name="delete" value="삭제">
+	</div>
 	<input type="button" onclick="location.href='/board'" value="취소">
 	</form>
+	
+	<div id="commentBox">
+		<form action="createComment" method="post">
+			<input type="hidden" name="title" th:value="${detail.title}">
+			<input type="hidden" name="boardidx" th:value="${detail.idx}">
+			<input type="hidden" name="memberid" th:value="${session.memberID}">
+			<input type="text" name="comment">
+			<button type="submit">등록</button>
+		</form>
+	</div>
+	
+	<form id="commentForm" method="post">
+		<div id="commentList" th:each="comment,index : ${boardComment}">
+			<input type="hidden" th:id="id+${index.count}" th:value="${comment.id}">
+			<input type="hidden" name="index" th:value="${index.count}">
+			<input type="hidden" th:id="memberid+${index.count}" th:value="${comment.memberid}">
+			
+			<input type="text" th:id="comment+${index.count}" th:value="${comment.comment}" readonly> 
+			<label>등록일 : </label><span th:text="${comment.writeDate}"></span>
+			<label>수정일 : </label><span th:text="${comment.modifiyDate}"></span>
+			<label>작성자 : </label><span th:id="memberid+${index.count}" th:text="${comment.memberid}" th:value="${comment.memberid}"></span>
+			<div th:if="${session.memberID}==${comment.memberid}">
+				<input type="button" th:id="${index.count}" onclick="btnCommentUpdate(this)" name="commentUpdate" value="수정">
+				<input type="button" th:id="${index.count}+10" onclick="btnCommentUpdateOk(this)" name="commentUpdateOk" style="display: none;" value="확인">
+				<input type="button" th:id="${index.count}" onclick="btnCommentDelete(this)" name="commentDelete" value="삭제">
+			</div>
+		</div>
+	</form>
+	
 </body>
 </html>

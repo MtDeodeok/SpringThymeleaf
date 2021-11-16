@@ -9,7 +9,7 @@
 	<insert id="createContents" parameterType="com.basic.vo.BoardVO">
 		insert into
 		board(title, memberid, contents, writeDate,modifiyDate, state)
-		values(#{title},2,#{contents},#{writeDate},#{modifiyDate},0)
+		values(#{title},#{memberid},#{contents},#{writeDate},#{modifiyDate},0)
 	</insert>
 
 	<!-- 글 수정 -->
@@ -24,6 +24,13 @@
 		DELETE FROM board WHERE
 		memberid=2 and idx=#{idx}
 	</delete>
+
+	<!-- 글 삭제 상태로 만들어 놓기 -->
+	<!-- <update id="deleteContentsState" parameterType="com.basic.vo.BoardVO">
+		UPDATE board SET
+		state=1
+		WHERE memberid=#{memberid} and idx=#{idx}
+	</update> -->
 
 	<!-- 게시글 가져오기 -->
 	<select id="selectAll" resultType="com.basic.vo.BoardVO">

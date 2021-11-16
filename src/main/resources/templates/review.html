@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="review">
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/js/review.js"></script>
+	<div id="commentBox">
+		<form action="createComment" method="post">
+			<input type="hidden" name="title" th:value="${detail.title}">
+			<input type="hidden" name="boardidx" th:value="${detail.idx}">
+			<input type="hidden" name="memberid" th:value="${session.memberID}">
+			<input type="text" name="comment">
+			<button type="submit">등록</button>
+		</form>
+	</div>
+
+	<form id="commentForm" method="post">
+		<div id="commentList" th:each="comment,index : ${boardComment}">
+			<input type="hidden" th:id="id+${index.count}"
+				th:value="${comment.id}"> <input type="hidden" name="index"
+				th:value="${index.count}"> <input type="hidden"
+				th:id="memberid+${index.count}" th:value="${comment.memberid}">
+
+			<input type="text" th:id="comment+${index.count}"
+				th:value="${comment.comment}" readonly> <label>등록일 :
+			</label><span th:text="${comment.writeDate}"></span> <label>수정일 : </label><span
+				th:text="${comment.modifiyDate}"></span> <label>작성자 : </label><span
+				th:id="memberid+${index.count}" th:text="${comment.memberid}"
+				th:value="${comment.memberid}"></span>
+
+			<div th:if="${session.memberID}==${comment.memberid}">
+				<input type="button" th:id="${index.count}"
+					onclick="btnCommentUpdate(this)" name="commentUpdate" value="수정">
+				<input type="button" th:id="${index.count}+10"
+					onclick="btnCommentUpdateOk(this)" name="commentUpdateOk"
+					style="display: none;" value="확인"> <input type="button"
+					th:id="${index.count}" onclick="btnCommentDelete(this)"
+					name="commentDelete" value="삭제">
+			</div>
+		</div>
+	</form>
+</th:block>
+</html>

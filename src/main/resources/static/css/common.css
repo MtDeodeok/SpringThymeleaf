@@ -1,0 +1,21 @@
+/* 스타일 공통 */
+body {
+	margin: 0;
+	padding: 0;
+}
+
+input::input-placeholder {
+	color: #ccc;
+}
+
+input::-webkit-input-placeholder {
+	color: #ccc;
+}
+
+input:-ms-input-placeholder {
+	color: #ccc;
+}
+
+input::-ms-input-placeholder {
+	color: #ccc;
+}

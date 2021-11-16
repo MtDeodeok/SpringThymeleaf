@@ -6,9 +6,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.basic.service.BoardService;
 import com.basic.service.CommentService;
@@ -34,25 +36,18 @@ public class BoardController {
 	}
 	
 	@GetMapping("/createContentsForm")
-	public void createContentsForm(HttpSession session) {
+	public void createContentsForm() {
 		
 	}
 	
 	@PostMapping("/createContents")
 	public String createContents(HttpSession session,BoardVO boardvo) {
 		boardvo.setMemberid((String) session.getAttribute("memberID"));
-		System.out.println(boardvo.getMemberid());
-		
 		bs.createContents(boardvo);
 		return "redirect:/board";
 	}
 	
-	@GetMapping("/detailPage")
-	public void detailPage() {
-		
-	}
-	
-	@PostMapping("detail")
+	@PostMapping(value="detail")
 	public String detail(Model model,String title, int idx) {
 		model.addAttribute("detail", bs.selectTitle(title));
 		model.addAttribute("boardComment",cs.selectBoardComment(idx));

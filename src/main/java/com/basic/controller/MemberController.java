@@ -29,14 +29,10 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	private final MemberService ms;
 
-	@GetMapping("/")
-	public void main() {
-		
-	}
 	
-	@GetMapping("/main")
-	public void mainpage() {
-		
+	@GetMapping(value = {"/","/main"})
+	public String main() {
+		return "main";
 	}
 
 	@GetMapping("/login") // 로그인

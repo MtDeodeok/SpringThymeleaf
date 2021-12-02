@@ -4,18 +4,8 @@ body {
 	padding: 0;
 }
 
+input::-webkit-input-placeholder,
+input::-ms-input-placeholder,
 input::input-placeholder {
-	color: #ccc;
-}
-
-input::-webkit-input-placeholder {
-	color: #ccc;
-}
-
-input:-ms-input-placeholder {
-	color: #ccc;
-}
-
-input::-ms-input-placeholder {
 	color: #ccc;
 }

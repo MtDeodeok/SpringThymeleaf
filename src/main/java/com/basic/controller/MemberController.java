@@ -29,17 +29,22 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	private final MemberService ms;
 
-	@GetMapping("/main")
+	@GetMapping("/")
 	public void main() {
 		
 	}
+	
+	@GetMapping("/main")
+	public void mainpage() {
+		
+	}
 
-	@GetMapping("/Login") // 로그인
+	@GetMapping("/login") // 로그인
 	public void Login() {
 		
 	}
 	
-	@PostMapping("/Login") 
+	@PostMapping("/login") 
 	public String Login(HttpServletRequest request,Model model, String id, String pw) {
 		HttpSession session = request.getSession();
 		int check = ms.memberCheck(id, pw);
@@ -50,13 +55,13 @@ public class MemberController {
 			session.setAttribute("profile",member.getProfile());
 			return "redirect:/main";
 		}
-		return "/Login";
+		return "/login";
 	}
 	
-	@RequestMapping(value="/LogOut", method = RequestMethod.GET)
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String LogOut(HttpSession session) {
 		session.invalidate();
-		return "/Login";
+		return "/login";
 	}
 	
 	@GetMapping("/join") // 회원가입
@@ -86,6 +91,6 @@ public class MemberController {
 		
 		
 		ms.insertMember(membervo);
-		return "/Login";
+		return "/login";
 	}
 }

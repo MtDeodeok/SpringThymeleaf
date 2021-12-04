@@ -24,7 +24,7 @@
 		</p>
 		<a href="/main">메인</a>
 		<a href="/board">게시판</a>
-		<a th:text="${session.memberID} ? 'LogOut' :'Login'" th:href="${session.memberID} ? '/LogOut' : '/Login'"></a>
+		<a th:text="${session.memberID} ? '로그아웃' :'로그인'" th:href="${session.memberID} ? '/logout' : '/login'"></a>
 	</div>
 </body>
 </html>

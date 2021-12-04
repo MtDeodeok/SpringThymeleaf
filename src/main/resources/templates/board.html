@@ -22,7 +22,7 @@
 					<span th:text="${session.memberID} ? ${session.memberID}:'Geust'">memberId</span>님 환영합니다.
 				</p>
 				<a href="/main">메인</a>
-				<a th:text="${session.memberID} ? 'LogOut' :'Login'" th:href="${session.memberID} ? '/LogOut' : '/Login'"></a>
+				<a th:text="${session.memberID} ? 'LogOut' :'Login'" th:href="${session.memberID} ? '/logOut' : '/login'"></a>
 			</div>
 			
 			<form method="post" id="detail">

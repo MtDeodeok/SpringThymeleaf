@@ -9,3 +9,178 @@ input::-ms-input-placeholder,
 input::input-placeholder {
 	color: #ccc;
 }
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* label */
+label {
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+	color: #3a3a3a;
+	margin-bottom: 4px;
+}
+
+label + input {
+	border: none;
+	border-bottom: 1px solid #999;
+}
+
+label + input:focus {
+	outline: none;
+	border-bottom-color: #000;
+}
+
+input:focus + label {
+	margin-top: 13px;
+}
+
+/* input */
+input {
+	appearance: none;
+	display: block;
+	font-size: 16px;
+	color: #666;
+}
+
+input[type=text],
+input[type=number],
+input[type=password] {
+	border-radius: 5px;
+	padding: 6px 5px 4px;
+}
+
+/* button */
+.btn {
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 0 20px;
+	font-size: 16px;
+	font-weight: bold;
+	border: none;
+	-webkit-appearance: none;
+	appearance: none;
+	cursor: pointer;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	background-color: #eee;
+	border-radius: 5px;
+	height: 40px;
+	line-height: 40px;
+}
+
+.btn:hover {
+	box-shadow: inset 0px 0px 10px 2px rgb(255 255 255 / 70%);
+}
+
+.btn.primary,
+.btn.login {
+	color: #fff;
+	background: linear-gradient(50deg, rgb(0, 195, 255) 0%, rgb(37, 80, 223) 35%, rgb(149, 41, 199) 80%);
+	border-width: 0;
+}
+
+.btn.login {
+	border-radius: 20px;
+}
+
+/* btn-group */
+.btn-group {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-group.right {
+	justify-content: flex-end;
+}
+
+.btn-group .btn + .btn {
+	margin-left: 15px;
+}
+
+.btn-group.type-vertical {
+	flex-direction: column;
+}
+
+.btn-group.type-vertical .btn {
+	width: 100%;
+}
+
+.btn-group.type-vertical .btn + .btn {
+	margin-left: 0;
+	margin-top: 10px;
+}
+
+/* 레이아웃 공통 배경 */
+.page-background {
+	position: relative;
+	overflow: hidden;
+	width: 100vw;
+	height: 100vh;
+	background: linear-gradient(50deg, rgb(0, 195, 255) 0%, rgb(37, 80, 223) 35%, rgb(149, 41, 199) 80%);
+}
+
+.page-background::before, .page-background::after {
+	position: absolute;
+	display: block;
+	content: "";
+	border-radius: 5px;
+	transform: rotate(55deg);
+	z-index: 2;
+}
+
+.page-background::before {
+	top: 5%;
+	left: -15%;
+	width: 30vw;
+	height: 20vw;
+	background-color: rgba(255, 255, 255, 0.03);
+}
+
+.page-background::after {
+	bottom: -30%;
+	right: -10%;
+	width: 35vw;
+	height: 45vw;
+	background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* 페이지 컨텐츠 영역*/
+.area-common {
+	box-sizing: border-box;
+	max-height: calc(100vh - 40px);
+	overflow: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.90);
+	box-shadow: 4px 4px 20px 0px rgb(0 0 0/ 5%);
+	z-index: 3;
+}
+
+.area-common.type-center {
+    max-width: 920px;
+    min-height: calc(100vh - 40px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.area-common.type-floating {
+	margin-top: 0;
+	margin-bottom: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* 페이지 컨텐츠 헤더 */
+.area-common header {
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	text-align: center;
+}

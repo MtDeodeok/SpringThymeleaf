@@ -2,64 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#list tr").on("click", function() {
-		var tdArr = new Array();
-		var tr = $(this)
-		var td = tr.children();
-		
-		if(td.eq(0).text()!="번호"){
-			var title = td.eq(2).text();
-			var idx = td.eq(1).text();
-	
-			$('input[id=titleMark]').val(title);
-			$('input[id=idxMark]').val(idx);
-			$("#detail").attr("action", "detail");
-			$("#detail").submit();
-		}
-	});
-});	
-</script>
+<title>게시판</title>
+<link rel="stylesheet" type="text/css" href="../static/css/common.css">
+<link rel="stylesheet" type="text/css" href="../static/css/board.css">
+<!-- <link rel="stylesheet" type="text/css" href="./css/common.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="./css/board.css"> -->
 </head>
 <body>
-	<h1>Board</h1>
-	<div>
-		<div th:if="${session.memberID}">
-			<img th:src="${#strings.isEmpty(session.profile)} ? '/profileImg/null.jpg' : ${session.profile}" />
+	<div class="page-background">
+		<div class="board-area area-common type-center">
+			<header>
+				Board
+			</header>
+			<div>
+				<div th:if="${session.memberID}">
+					<img th:src="${#strings.isEmpty(session.profile)} ? '/profileImg/null.jpg' : ${session.profile}" />
+				</div>
+				<p>
+					<span th:text="${session.memberID} ? ${session.memberID}:'Geust'">memberId</span>님 환영합니다.
+				</p>
+				<a href="/main">메인</a>
+				<a th:text="${session.memberID} ? 'LogOut' :'Login'" th:href="${session.memberID} ? '/LogOut' : '/Login'"></a>
+			</div>
+			
+			<form method="post" id="detail">
+				<input type="hidden" id="titleMark" name="title">
+				<input type="hidden" id="idxMark" name="idx">
+			</form>
+			<table class="borad-list" id="list">
+				<colgroup>
+					<col style="width: 80px">
+					<col style="width: auto">
+					<col style="width: 120px">
+					<col style="width: 150px">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>등록/수정일</th>
+						<th>작성자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- <tr>
+						<td>(ID)</td>
+						<td class="title">(제목)</td>
+						<td>(등록/수정일)</td>
+						<td>(작성자)</td>
+					</tr> -->
+					<tr th:each="board, index : ${boardList}">
+						<td id="count" th:text="${index.count}" th:value="${index.count}"></td>
+						<td style="display: none" id="idx" th:text="${board.idx}" th:value="${board.idx}"></td>
+						<td class="title" id="title" th:text="${board.title}" th:value="${board.title}"></td>
+						<td th:text="${board.modifiyDate}"></td>
+						<td th:text="${board.memberid}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="btn-group right" th:if="${session.memberID}">
+				<button class="btn primary" onclick="location.href='/createContentsForm'">글쓰기</button>
+			</div>
 		</div>
-		<p>
-			<span th:text="${session.memberID} ? ${session.memberID}:'Geust'">memberId</span>님 환영합니다.
-		</p>
-		<a href="/main">메인</a>
-		<a th:text="${session.memberID} ? 'LogOut' :'Login'" th:href="${session.memberID} ? '/LogOut' : '/Login'"></a>
 	</div>
-	
-	<form method="post" id="detail">
-		<input type="hidden" id="titleMark" name="title">
-		<input type="hidden" id="idxMark" name="idx">
-	</form>
-	<table id="list" border="1">
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>등록/수정일</th>
-				<th>작성자</th>				
-			</tr>
-		</thead>
-		<tr th:each="board, index : ${boardList}">
-			<td id="count" th:text="${index.count}" th:value="${index.count}"></td>
-			<td style="display: none" id="idx" th:text="${board.idx}" th:value="${board.idx}"></td>
-			<td id="title" th:text="${board.title}" th:value="${board.title}"></td>
-			<td th:text="${board.modifiyDate}"></td>
-			<td th:text="${board.memberid}"></td>
-		</tr>
-	</table>
-	<div th:if="${session.memberID}">
-		<input type="button" onclick="location.href='/createContentsForm'" value="글쓰기">
-	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#list tr").on("click", function() {
+				var tdArr = new Array();
+				var tr = $(this)
+				var td = tr.children();
+
+				if(td.eq(0).text()!="번호"){
+					var title = td.eq(2).text();
+					var idx = td.eq(1).text();
+			
+					$('input[id=titleMark]').val(title);
+					$('input[id=idxMark]').val(idx);
+					$("#detail").attr("action", "detail");
+					$("#detail").submit();
+				}
+			});
+		});
+	</script>
 </body>
 </html>

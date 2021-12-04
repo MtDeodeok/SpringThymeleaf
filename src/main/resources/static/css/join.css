@@ -1,137 +1,45 @@
-body {
-	margin: 0;
-	padding: 0;
-}
+/* 회원가입 */
+/* .join-page {} */
 
-.join-page {
-	position: relative;
-	overflow: hidden;
-	width: 100vw;
-	height: 100vh;
-	background: linear-gradient(50deg, rgb(0, 195, 255) 0%, rgb(37, 80, 223)
-		35%, rgb(149, 41, 199) 80%);
-}
-
-.join-page::before, .join-page::after {
-	position: absolute;
-	display: block;
-	content: "";
-	border-radius: 5px;
-	transform: rotate(55deg);
-}
-
-.join-page::before {
-	top: 5%;
-	left: -15%;
-	width: 30vw;
-	height: 20vw;
-	background-color: rgba(255, 255, 255, 0.03);
-}
-
-.join-page::after {
-	bottom: -30%;
-	right: -10%;
-	width: 35vw;
-	height: 45vw;
-	background-color: rgba(0, 0, 0, 0.03);
-}
-
-.join-form {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+.join-area {
 	padding: 40px;
-	border-radius: 10px;
-	background-color: #fff;
-	box-shadow: 4px 4px 20px 0px rgb(0 0 0/ 5%);
 }
 
-.join-form header {
-	font-size: 28px;
-	font-weight: bold;
-	margin-bottom: 30px;
-	text-align: center;
-}
-
-.join-form label {
-	display: block;
-	font-size: 13px;
-	font-weight: bold;
-	color: #3a3a3a;
-	margin-bottom: 4px;
-}
-
-.join-form form>div+div {
+.join-area form>div+div {
 	margin-top: 14px;
 }
 
-.join-form form>div:hover label+input {
+.join-area form>div:hover label+input {
 	border-bottom-color: #333;
 }
 
-.join-form form>div input {
+.join-area form>div input {
 	width: 100%;
 }
 
-.join-form form>div label+input {
-	display: block;
-	padding: 6px 0 4px;
-	font-size: 16px;
-	color: #666;
-	border: none;
-	border-bottom: 1px solid #999;
-}
-
-.join-form form>div label+input:focus {
-	outline: none;
-	margin-bottom: 0px;
-	border-bottom-color: #000;
-}
-
-.join-form form>div input:focus+label {
-	margin-top: 13px;
-}
-
-.join-form form>div input:focus+.btn.join {
+.join-area form>div input:focus+.btn.join {
 	margin-top: 29px;
 }
 /* 회원가입 버튼 */
-.join-form form .btn-group {
+.join-area form .btn-group {
 	margin-top: 50px;
 	padding-bottom: 10px;
-	text-align: center;
 }
 
-.join-form form .btn-group .btn {
-	display: inline-block;
-	box-sizing: border-box;
-	padding: 0 20px;
-	font-size: 16px;
-	font-weight: bold;
-	border: none;
-	-webkit-appearance: none;
-	appearance: none;
-	cursor: pointer;
-	background-color: #f1f1f1;
-	border-radius: 20px;
-	height: 40px;
-	line-height: 40px;
-}
 /* 프로필 이미지 */
-.join-form .profile-img {
+.join-area .profile-img {
 	border-bottom: 1px solid #666;
 	padding-bottom: 4px;
 }
 
-.join-form .profile-img img {
+.join-area .profile-img img {
 	display: inline-block;
 	vertical-align: middle;
 	width: 64px;
 	height: 64px;
 }
 
-.join-form .profile-img input {
+.join-area .profile-img input {
 	display: inline-block;
 	vertical-align: middle;
 	width: calc(100% - 70px);

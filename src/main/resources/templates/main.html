@@ -2,10 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>처음</title>
+
+<link rel="stylesheet" type="text/css" href="../static/css/common.css">
+
 </head>
 <body>
-	<h1>메인 페이지.</h1>
+	<div class="page-background">
+		<div class="area-common">
+			<header>
+				처음
+			</header>
+		</div>
+	</div>
 	<div>
 		<div>
 			<img th:if="${session.memberID}" th:src="${#strings.isEmpty(session.profile)} ? '/profileImg/null.jpg' : ${session.profile}" />
@@ -17,6 +26,5 @@
 		<a href="/board">게시판</a>
 		<a th:text="${session.memberID} ? 'LogOut' :'Login'" th:href="${session.memberID} ? '/LogOut' : '/Login'"></a>
 	</div>
-
 </body>
 </html>
